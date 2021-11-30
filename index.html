@@ -82,12 +82,14 @@ body {
     var restante;
     var oculto = false;
     var palabra;
+    var updater;
     function nuevaPalabra(n) {
         var listaDePalabras = listaDeListas[n];
         palabra = listaDePalabras[Math.floor(Math.random() * listaDePalabras.length)];
         if(oculto) ocultar(); // DESocultar
         document.getElementById("palabra").innerText = palabra;
         restante = tiempo;
+        clearInterval(updater);
         updater = setInterval(function() {
             console.log("Holi");
             restante -= 1000;
@@ -116,8 +118,6 @@ body {
         https://github.com/twitter/twemoji/blob/master/assets/svg/1f648.svg
         https://github.com/twitter/twemoji/blob/master/assets/svg/1f649.svg
 TODO:
-    - Ocultar y desocultar
-    - Cambiar icono del monito
     - Cargar datos dinamicamente
     -->
 </html>
