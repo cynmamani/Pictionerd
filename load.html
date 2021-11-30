@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <style>
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+        </style>
+    </head>
+    <body class="text-center d-flex flex-column align-self-center h-100">
+<main class="flex-grow-1 d-flex align-items-center w-100">
+    <div class="container">
+        <div class="row gy-4 justify-content-center">
+            <div class="col-12">
+                <form id="formulario"></form>
+                <input form="formulario" type="text" id="tiempo" name="tiempo" value="60"></input>
+            </div>
+            <div class="col-12"> 
+                <textarea form="formulario" id="palabras" name="palabras" rows="12" cols="33">
+Punto
+Línea
+
+Círculo
+Cuadrado
+
+Hipotenusa
+Triángulo Rectángulo
+
+Derivada
+Integral</textarea> 
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-lg btn-outline-dark w-100 h-100" onclick="cargarDatos();">
+                    <h1>
+                        <svg xmlns="http://www.w3.org/2000/svg" style="height:1em;width:1em;" viewBox="0 0 36 36"><path fill="#31373D" d="M4 36s-4 0-4-4V4s0-4 4-4h26c1 0 2 1 2 1l3 3s1 1 1 2v26s0 4-4 4H4z"/><path fill="#55ACEE" d="M5 19v-1s0-2 2-2h21c2 0 2 2 2 2v1H5z"/><path fill="#E1E8ED" d="M5 32.021V19h25v13s0 2-2 2H7c-2 0-2-1.979-2-1.979zM10 3s0-1 1-1h18c1.048 0 1 1 1 1v10s0 1-1 1H11s-1 0-1-1V3zm12 10h5V3h-5v10z"/></svg>
+                    </h1>
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer mt-auto py-3 bg-light w-100">
+    <div class="container">
+        <div class="row gy-4 justify-content-center">
+            <div class="col-2">
+                <a type="button" class="btn btn-lg btn-outline-dark w-100 h-100" href="https://github.com/luigig44/Pictionerd">
+                    <h1>
+                        <svg xmlns="http://www.w3.org/2000/svg" style="height:1em;width:1em;" viewBox="0 0 36 36"><path fill="#9AAAB4" d="M27.388 24.642L24.56 27.47l-4.95-4.95 2.828-2.828z"/><path fill="#66757F" d="M34.683 29.11l-5.879-5.879c-.781-.781-2.047-.781-2.828 0l-2.828 2.828c-.781.781-.781 2.047 0 2.828l5.879 5.879c1.562 1.563 4.096 1.563 5.658 0 1.56-1.561 1.559-4.094-.002-5.656z"/><circle fill="#8899A6" cx="13.586" cy="13.669" r="13.5"/><circle fill="#BBDDF5" cx="13.586" cy="13.669" r="9.5"/></svg>
+                    </h1>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</footer>
+<script>
+    function cargarDatos() {
+        var tiempo = Number(document.getElementById("tiempo").value)*1000;
+        var líneas = document.getElementById("palabras").value.split("\n");
+        var nivel = 0;
+        var palabra = 0;
+        var listaDeListas = [];
+        for(var i = 0; i<líneas.length; i++){
+            if(líneas[i] == "") {
+                palabra = 0;
+                nivel++;
+            } else {
+                if(palabra == 0) listaDeListas[nivel] = [];
+                listaDeListas[nivel][palabra] = líneas[i];
+                palabra++;
+            }
+        }
+        
+        localStorage.setItem("tiempo",JSON.stringify(tiempo));
+        localStorage.setItem("listaDeListas",JSON.stringify(listaDeListas));
+        window.location.href="index.html";
+    }
+
+    var tiempo = JSON.parse(localStorage.getItem("tiempo"));
+    var listaDeListas = JSON.parse(localStorage.getItem("listaDeListas"));
+    if(tiempo != null && listaDeListas != null){
+        document.getElementById("tiempo").value = tiempo / 1000;
+        document.getElementById("palabras").value = "";
+        for(var i = 0; i<listaDeListas.length; i++){
+            for(var j = 0; j<listaDeListas[i].length; j++){
+                document.getElementById("palabras").value += listaDeListas[i][j] + "\n";
+            }
+            document.getElementById("palabras").value += "\n";
+        }
+    }
+    
+</script>
+    </body>
+</html>

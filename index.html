@@ -58,6 +58,13 @@ body {
     <div class="container">
         <div class="row gy-4 justify-content-center">
             <div class="col-2">
+                <a type="button" class="btn btn-lg btn-outline-dark w-100 h-100" href="load.html">
+                    <h1>
+                        <svg xmlns="http://www.w3.org/2000/svg" style="height:1em;width:1em;" viewBox="0 0 36 36"><path fill="#269" d="M0 29c0 2.209 1.791 4 4 4h24c2.209 0 4-1.791 4-4V12c0-2.209-1.791-4-4-4h-9c-3.562 0-3-5-8.438-5H4C1.791 3 0 4.791 0 7v22z"/><path fill="#55ACEE" d="M30 10h-6.562C18 10 18.562 15 15 15H6c-2.209 0-4 1.791-4 4v10c0 .553-.448 1-1 1s-1-.447-1-1c0 2.209 1.791 4 4 4h26c2.209 0 4-1.791 4-4V14c0-2.209-1.791-4-4-4z"/></svg>
+                    </h1>
+                </a>
+            </div>
+            <div class="col-2">
                 <a type="button" class="btn btn-lg btn-outline-dark w-100 h-100" href="https://github.com/luigig44/Pictionerd">
                     <h1>
                         <svg xmlns="http://www.w3.org/2000/svg" style="height:1em;width:1em;" viewBox="0 0 36 36"><path fill="#9AAAB4" d="M27.388 24.642L24.56 27.47l-4.95-4.95 2.828-2.828z"/><path fill="#66757F" d="M34.683 29.11l-5.879-5.879c-.781-.781-2.047-.781-2.828 0l-2.828 2.828c-.781.781-.781 2.047 0 2.828l5.879 5.879c1.562 1.563 4.096 1.563 5.658 0 1.56-1.561 1.559-4.094-.002-5.656z"/><circle fill="#8899A6" cx="13.586" cy="13.669" r="13.5"/><circle fill="#BBDDF5" cx="13.586" cy="13.669" r="9.5"/></svg>
@@ -69,15 +76,8 @@ body {
 
 </footer>
 <script>
-    /*
-        * Entrada en formato:
-        * tiempo del reloj
-        * palabras del nivel 1, separadas por saltos de línea
-        * línea en blanco
-        * palabras del n. 2, y así.
-        */
-    var listaDeListas = [["Hipotenusa", "Rectángulo", "Radio", "Arco Capaz"],[],[],[]]; 
-    var tiempo = 1 * 60 * 1000;
+    var tiempo = JSON.parse(localStorage.getItem("tiempo"));
+    var listaDeListas = JSON.parse(localStorage.getItem("listaDeListas"));
     var restante;
     var oculto = true;
     var palabra = "Perdiste";
