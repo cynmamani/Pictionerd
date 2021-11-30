@@ -19,7 +19,7 @@ body {
         </style>
     </head>
     <body class="text-center d-flex flex-column align-self-center h-100">
-<main class="flex-grow-1 d-flex align-items-center">
+<main class="flex-grow-1 d-flex align-items-center w-100">
     <div class="container">
         <div class="row gy-4 justify-content-center">
             <div class="col-6 col-md-3">
@@ -78,6 +78,8 @@ body {
 <script>
     var tiempo = JSON.parse(localStorage.getItem("tiempo"));
     var listaDeListas = JSON.parse(localStorage.getItem("listaDeListas"));
+    if(tiempo == null || listaDeListas == null)
+        window.location.href="load.html";
     var restante;
     var oculto = true;
     var palabra = "Perdiste";
@@ -93,7 +95,6 @@ body {
         restante = tiempo;
         clearInterval(updater);
         updater = setInterval(function() {
-            console.log("Holi");
             restante -= 1000;
             document.getElementById("tiempo").innerText = Math.floor(restante/60000)+":"+String(Math.floor((restante%60000)/1000)).padStart(2,"0");
             // actualizar reloj
